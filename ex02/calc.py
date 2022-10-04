@@ -32,8 +32,8 @@ class CaluGui(object):
         # Parts Setting
         self.calc_var = tk.StringVar() # 計算式用の動的変数
         self.ans_var = tk.StringVar() # 結果用の動的変数
-        calc_label = tk.Label(calc_frame, textvariable=self.calc_var, font=("",20)) # 計算式用のLabel
-        ans_label = tk.Label(calc_frame, textvariable=self.ans_var, font=("",15)) # 結果用のLabel
+        calc_label = tk.Label(calc_frame, textvariable=self.calc_var, font=("",15) )# 計算式用のLabel
+        ans_label = tk.Label(calc_frame, textvariable=self.ans_var, font=("",30)) # 結果用のLabel
         calc_label.pack(anchor=tk.E) # 右揃えで配置
         ans_label.pack(anchor=tk.E) # 右揃えで配置
  

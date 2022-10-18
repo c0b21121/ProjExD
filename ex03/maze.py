@@ -1,6 +1,10 @@
 import tkinter as tk
 
+import keyboard
 import maze_maker as mm
+
+RED=(255,0,0)
+BULE=(0,0,255)
 
 
 def key_down(event):
@@ -14,29 +18,32 @@ def key_up(event):
     key = ""
 
 
+
+    
 def main_proc():
     global cx, cy
     global mx,my
     
-    if key == "Up":
+    if key == "w":
         my -= 1
-    if key == "Down":
+    if key == "s":
         my += 1
-    if key == "Left":
+    if key == "a":
         mx -= 1
-    if key == "Right":
+    if key == "d":
         mx += 1
     if maze_lst[my][mx]==0:
         cx,cy=mx*100+50,my*100+50
     else:
-        if key == "Up":
+        if key == "w":
             my += 1
-        if key == "Down":
+        if key == "s":
             my -= 1
-        if key == "Left":
+        if key == "a":
             mx += 1
-        if key == "Right":
+        if key == "d":
             mx -= 1
+    
 
     canv.coords("tori", cx, cy)
     root.after(100, main_proc)
@@ -57,7 +64,8 @@ if __name__ == "__main__":
     # 練習3
     tori = tk.PhotoImage(file="fig/5.png") 
     mx,my=1,1
-    cx, cy = mx*100+50, my*100+50
+    cx, cy = mx*100+50, my*100+50#スタート位置
+
     canv.create_image(cx, cy, image=tori, tag="tori")
 
     # 練習4
@@ -70,6 +78,13 @@ if __name__ == "__main__":
     # 練習7
     main_proc()
 
+while True:
+    if keyboard.read_key() == "j":
+        print("j")
+        break
+    elif keyboard.is_pressed("j"):
+        print("j")
+        break
 
        
     root.mainloop()

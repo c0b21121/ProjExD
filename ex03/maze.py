@@ -11,8 +11,6 @@ def key_down(event):
     global key
     key = event.keysym
 
-
-
 def key_up(event):
     global key
     key = ""
@@ -23,7 +21,6 @@ def key_up(event):
 def main_proc():
     global cx, cy
     global mx,my
-    
     if key == "w":
         my -= 1
     if key == "s":
@@ -48,7 +45,9 @@ def main_proc():
     canv.coords("tori", cx, cy)
     root.after(100, main_proc)
 
-
+    
+    
+    
 if __name__ == "__main__":
     root = tk.Tk()
     root.title("迷えるこうかとん") # 練習1
@@ -85,6 +84,7 @@ while True:
     elif keyboard.is_pressed("j"):
         print("j")
         break
+
 
        
     root.mainloop()

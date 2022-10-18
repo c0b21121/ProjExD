@@ -74,13 +74,13 @@ if __name__ == "__main__":
     # 練習7
     main_proc()
 
-while True:
-    if keyboard.read_key() == "j":
-        print("j")
-        break
-    elif keyboard.is_pressed("j"):
-        print("j")
-        break
+#while True:
+    #if keyboard.read_key() == "j":
+        #print("j")
+        #break
+    #elif keyboard.is_pressed("j"):
+        #print("j")
+        #break
 
 
        

@@ -11,14 +11,10 @@ def key_down(event):
     global key
     key = event.keysym
 
-    
 def key_up(event):
     global key
     key = ""
-
-
-
-    
+   
 def main_proc():
     global cx, cy
     global mx,my

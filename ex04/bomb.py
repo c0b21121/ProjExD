@@ -2,7 +2,7 @@ import pygame as pg
 import sys
 from random import randint
 import tkinter.messagebox as tkm
-import tkinter as tk
+import tkinter 
 import datetime
 
 key_delta = {

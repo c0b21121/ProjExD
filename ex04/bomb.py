@@ -20,7 +20,7 @@ def check_bound(obj_rct, scr_rct):
         tate = -1
     return yoko, tate
 
-def time():
+def time():#時間の表示
     pg.init()                                   
     screen = pg.display.set_mode((300, 200))    
     pg.display.set_caption("GAME")             

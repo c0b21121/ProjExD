@@ -57,7 +57,7 @@ class Bird:
         self.blit(scr) # =scr.sfc.blit(self.sfc, self.rct)
 
 class Timer:
-    pg.init()
+    pg.init(
     window = pg.display.set_mode((200, 200))
     clock = pg.time.Clock()
     font = pg.font.SysFont(None, 100)

@@ -25,8 +25,6 @@ class Screen:
         
     def blit(self):
         self.sfc.blit(self.bgi_sfc, self.bgi_rct)
-    
-
 
 class Bird:
     key_delta = {
@@ -111,7 +109,6 @@ class Bomb:
         self.vy *= tate
         self.blit(scr) # =scr.sfc.blit(self.sfc, self.rct)
 
-
 def check_bound(obj_rct, scr_rct):
     """
     obj_rct：こうかとんrct，または，爆弾rct
@@ -124,7 +121,6 @@ def check_bound(obj_rct, scr_rct):
     if obj_rct.top < scr_rct.top or scr_rct.bottom < obj_rct.bottom: 
         tate = -1
     return yoko, tate
-
 
 def main():
     # 練習1
@@ -157,7 +153,6 @@ def main():
 
         pg.display.update() #練習2
         clock.tick(1000)
-
 
 if __name__ == "__main__":
     pg.init() # 初期化

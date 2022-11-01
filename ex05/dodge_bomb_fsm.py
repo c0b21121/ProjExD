@@ -56,7 +56,7 @@ class Bird:
                     self.rct.centery -= delta[1]
         self.blit(scr) # =scr.sfc.blit(self.sfc, self.rct)
 
-class timer:
+class Timer:
     pg.init()
     window = pg.display.set_mode((200, 200))
     clock = pg.time.Clock()

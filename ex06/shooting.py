@@ -2,6 +2,7 @@ import pygame
 import sys
 import math
 import random
+from tkinter import messagebox as mb
 
 
 img_bg = pygame.image.load("fig/sora2.png")
@@ -11,7 +12,7 @@ img_enemy = [
     pygame.image.load("fig/kaeru.png"),#敵画像
     pygame.image.load("fig/sun2.png")]#敵の攻撃弾画像
 
-bg_y = 0
+bg_y = 0 #背景画像のY座標(新垣颯大)
 px = 320 #プレイヤーのX座標
 py = 240 #プレイヤーのY座標
 bx = 0 #弾のX座標
@@ -23,8 +24,8 @@ ENEMY_MAX = 100 #敵の最大数
 ENEMY_BULLET=1
 bull_n = 0
 bull_x =[0]*BULLET_MAX
-bull_y =[0]*BULLET_MAX
-bull_f =[False]*BULLET_MAX
+bull_y =[0]*BULLET_MAX 
+bull_f =[False]*BULLET_MAX #弾が発射状態か
 
 ebull_n = 0
 ebull_x = [0]*ENEMY_MAX
@@ -34,6 +35,8 @@ ebull_f =[False]*ENEMY_MAX
 ebull_f2 = [False]*ENEMY_MAX
 e_list = [0]*ENEMY_MAX
 e_speed = [0]*ENEMY_MAX
+
+run_flag = True
 
 def set_bullet():#弾のスタンバイ
     global bull_n
@@ -51,7 +54,7 @@ def move_bullet(screen):#弾を飛ばす
                 bull_f[i] = False
 
 def move_player(screen,key):
-    global px,py,space
+    global px,py,space,run_flag
     if key[pygame.K_UP] == 1:
         py = py - 10
         if py < 20:
@@ -71,6 +74,17 @@ def move_player(screen,key):
     space = (space+1)*key[pygame.K_SPACE]
     if space%5 == 1: #5フレーム毎に弾を飛ばす
         set_bullet()
+        
+    for i in range(ENEMY_MAX):
+        if ebull_f[i] == True:
+            w = img_enemy[e_list[i]].get_width()
+            h = img_enemy[e_list[i]].get_height()
+            r = int((w+h)/2)+10
+            
+            if distance(ebull_x[i],ebull_y[i],px,py) < r*r:#敵及び敵の攻撃に接触
+                ebull_f[i] = False
+                ebull_f2[i] = False
+                run_flag = False
 
     screen.blit(img_player,[px-16,py-16])
 def set_enemy(x,y,a,enemy,speed):
@@ -98,10 +112,11 @@ def move_enemy(screen):
             if ebull_x[i] < -40 or ebull_x[i] > 680 or ebull_y[i] < -40 or ebull_y[i] > 520:#画面外に敵が消える
                 ebull_f[i] = False
                 ebull_f2[i] = False
+                
             if e_list[i] !=ENEMY_BULLET:
                 w=img_enemy[e_list[i]].get_width()
                 h=img_enemy[e_list[i]].get_height()
-                r=int((w+h)/4)+8
+                r=int((w+h)/2)-8
                 for n in range(BULLET_MAX):
                     if bull_f[n]==True and distance(ebull_x[i]-16,ebull_y[i]-16,bull_x[n],bull_y[n])<r*r:
                         bull_f[n]=False
@@ -115,13 +130,13 @@ def distance(x1,y1,x2,y2):
 
 def main():
     global t,bg_y
-    pygame.init()
+    pygame.init() 
     pygame.display.set_caption("シューティングゲーム")
     screen = pygame.display.set_mode((640,480))
     clock = pygame.time.Clock()
 
-    while True:
-        t=t+1
+    while run_flag:
+        t=t+1 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
@@ -137,5 +152,13 @@ def main():
         move_enemy(screen)
         pygame.display.update()
         clock.tick(30)
+    
+        
+def gameover():#GameOverをtkinterで表示する関数(新垣颯大)
+    mes = mb.showinfo('GAME OVER', 'あなたは死にましたー')
+    pygame.quit()
+    sys.exit()
+    
 if __name__ == "__main__":
     main()
+    gameover()

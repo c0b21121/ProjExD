@@ -74,7 +74,7 @@ def move_player(screen,key):
     space = (space+1)*key[pygame.K_SPACE]
     if space%5 == 1: #5フレーム毎に弾を飛ばす
         set_bullet()
-        mixer.music.play(1)
+        mixer.music.play(1) #21055 菊池
 
     screen.blit(img_player,[px-16,py-16])
 def set_enemy(x,y,a,enemy,speed):
@@ -123,10 +123,10 @@ def main():
     pygame.display.set_caption("シューティングゲーム")
     screen = pygame.display.set_mode((640,480))
     clock = pygame.time.Clock()
-    mixer.init()
+    mixer.init()#21055 菊池
     mixer.music.load("fig/se_music.mp3")
 
-    se_music = pygame.mixer.Sound("fig/se_music.mp3")
+    
 
     while True:
         t=t+1

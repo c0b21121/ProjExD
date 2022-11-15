@@ -293,7 +293,6 @@ def effect_explode(x, y): #エフェクトを描画する準備（成澤）
     effect_l[e_n] = 1
     effect_x[e_n] = x #エフェクト画像のX座標
     effect_y[e_n] = y #エフェクト画像のY座標
-    #e_no = (e_n + 1) % EFFECT_MAX
 
 
 def draw_effect(screen): #エフェクト描画（成澤）

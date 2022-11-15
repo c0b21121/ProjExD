@@ -1,12 +1,10 @@
+import pygame as pg
 import sys
 import math
 import random
 import tkinter.messagebox as tkm
+from pygame import mixer
 
-#C0B21009 新垣颯大==================================================
-WIDTH = 640
-HEIGHT = 480
-#C0B21009 新垣颯大==================================================
 
 img_bg = pg.image.load("fig/sora2.png")
 img_player = pg.image.load("fig/mafu2.png")
@@ -110,7 +108,7 @@ def move_bullet(screen):#弾を飛ばす
 
 
 def move_player(screen, key):
-    global px, py, space, player_hp, player_muteki, idx, t, score
+    global px, py, space, player_hp, player_muteki, idx, t, score, reload_timer, REROAD_TIME
     if key[pg.K_UP] == 1:
 
         py = py - 10
@@ -163,7 +161,7 @@ def move_player(screen, key):
                     effect_explode(px,py)
                     #(佐々木)(成澤)
                     player_hp = player_hp - 5 #ダメージを受ける
-                    score -=50
+                    score -=5
                     if player_hp <= 0:
                         idx = 2
                         t = 0
@@ -172,7 +170,7 @@ def move_player(screen, key):
                     ebull_f[i] = False
                     ebull_f2[i] = False
                 
-                REROAD_TIME = 10
+                REROAD_TIME = 5
 
             
     elif idx == 3: #Hard mode
@@ -185,7 +183,7 @@ def move_player(screen, key):
                 if distance(ebull_x[i],ebull_y[i], px, py) < r*r: #敵及び敵の攻撃に接触
                     effect_explode(px,py)
                     player_hp = player_hp - 10 #ダメージを受ける
-                    score -=70
+                    score -=10
                     if player_hp <= 0:
                         idx = 2
                         t = 0
@@ -194,7 +192,7 @@ def move_player(screen, key):
                     ebull_f[i] = False
                     ebull_f2[i] = False
 
-                REROAD_TIME = 30
+                REROAD_TIME = 10
 
     elif idx == 6: #stage lv.2
         for i in range(ENEMY_MAX):
@@ -206,7 +204,7 @@ def move_player(screen, key):
                 if distance(ebull_x[i],ebull_y[i],px,py) < r*r: #敵及び敵の攻撃に接触
                     effect_explode(px,py)
                     player_hp = player_hp - 15 #ダメージを受ける
-                    score -=80
+                    score -=15
                     if player_hp <= 0:
                         idx = 2
                         t = 0
@@ -215,7 +213,7 @@ def move_player(screen, key):
                     ebull_f[i] = False
                     ebull_f2[i] = False
                 
-                REROAD_TIME = 50
+                REROAD_TIME = 15
 
     
 def set_enemy(x, y, a, enemy, sp):
@@ -375,11 +373,11 @@ def main(): #main関数
         #(佐々木)(成澤)(新垣)
         if idx == 2: #gameover
             draw_text(screen, 320, 240, "GAMEOVER", 100, RED)
-        pg.draw.rect(screen,(32,32,32),[10+p_hp*2,450,(100-p_hp)*2,25])#ダメージを受けたら矩形で塗りつぶす
+        pg.draw.rect(screen,(32,32,32),[10+player_hp*2,450,(100-player_hp)*2,25])#ダメージを受けたら矩形で塗りつぶす
         
         #(佐々木)-------------------
         if idx == 3: #playing #hard
-            move_enemy(screen,key)
+            move_player(screen,key)
             move_bullet(screen)
 
             if t%10 == 0:#10フレームにつき敵1体出現
@@ -395,8 +393,8 @@ def main(): #main関数
                 t = 0
                 px = 320
                 py = 300
-                p_hp = 100
-                p_muteki = 0
+                player_hp = 100
+                player_muteki = 0
                 for i in range(BULLET_MAX):
                     bull_f[i] = False
                 for i in range(ENEMY_MAX):
@@ -413,8 +411,8 @@ def main(): #main関数
                 t = 0
                 px = 320
                 py = 300
-                p_hp = 50
-                p_muteki = 0
+                player_hp = 50
+                player_muteki = 0
                 score = 0
                 for i in range(BULLET_MAX):
                     bull_f[i] = False
@@ -442,7 +440,7 @@ def main(): #main関数
 
         if idx == 1 or idx == 3 or idx == 6:#ゲームプレイ中のみ体力ゲージとスコアを表示する
             screen.blit(img_hp,(10,450))#体力ゲージ
-            pg.draw.rect(screen,(32,32,32),[10+p_hp*2,450,(100-p_hp)*2,25])#ダメージを受けたら矩形で塗りつぶす
+            pg.draw.rect(screen,(32,32,32),[10+player_hp*2,450,(100-player_hp)*2,25])#ダメージを受けたら矩形で塗りつぶす
             draw_text(screen, 580, 20, "SCORE" + str(score), 30, WHITE)
         #(佐々木)--------------  
 

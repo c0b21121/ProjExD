@@ -160,7 +160,7 @@ def move_player(screen, key):
                     #(成澤)
                     effect_explode(px,py)
                     #(佐々木)(成澤)
-                    player_hp = player_hp - 5 #ダメージを受ける
+                    player_hp = player_hp - 10 #ダメージを受ける
                     score -=5
                     if player_hp <= 0:
                         idx = 2
@@ -183,12 +183,12 @@ def move_player(screen, key):
                 if distance(ebull_x[i],ebull_y[i], px, py) < r*r: #敵及び敵の攻撃に接触
                     effect_explode(px,py)
                     player_hp = player_hp - 10 #ダメージを受ける
-                    score -=10
+                    score -= 5
                     if player_hp <= 0:
                         idx = 2
                         t = 0
-                    if player_hp == 0:
-                        player_hp = 15 #無敵時間
+                    if player_muteki == 0:
+                        player_muteki = 15 #無敵時間
                     ebull_f[i] = False
                     ebull_f2[i] = False
 
@@ -203,8 +203,8 @@ def move_player(screen, key):
                 
                 if distance(ebull_x[i],ebull_y[i],px,py) < r*r: #敵及び敵の攻撃に接触
                     effect_explode(px,py)
-                    player_hp = player_hp - 15 #ダメージを受ける
-                    score -=15
+                    player_hp = player_hp - 10 #ダメージを受ける
+                    score -=10
                     if player_hp <= 0:
                         idx = 2
                         t = 0
@@ -372,7 +372,6 @@ def main(): #main関数
         #(佐々木)(成澤)(新垣)
         if idx == 2: #gameover
             draw_text(screen, 320, 240, "GAMEOVER", 100, RED)
-        pg.draw.rect(screen,(32,32,32),[10+player_hp*2,450,(100-player_hp)*2,25])#ダメージを受けたら矩形で塗りつぶす
         
         #(佐々木)-------------------
         if idx == 3: #playing #hard
@@ -433,9 +432,15 @@ def main(): #main関数
                 pg.quit()
                 sys.exit()
             if key[pg.K_6] == 1:
-                pg.quit()
+                #pg.quit()
                 idx = 0
-        
+                t = 0
+                px = 320
+                py = 300
+                player_hp = 100
+                player_muteki = 0
+                score = 0
+
 
         if idx == 1 or idx == 3 or idx == 6:#ゲームプレイ中のみ体力ゲージとスコアを表示する
             screen.blit(img_hp,(10,450))#体力ゲージ

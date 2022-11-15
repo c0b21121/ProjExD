@@ -441,7 +441,7 @@ def main(): #main関数
             screen.blit(img_hp,(10,450))#体力ゲージ
             pg.draw.rect(screen,(32,32,32),[10+player_hp*2,450,(100-player_hp)*2,25])#ダメージを受けたら矩形で塗りつぶす
             draw_text(screen, 580, 20, "SCORE" + str(score), 30, WHITE)
-        #(佐々木)--------------  
+        #(佐々木)--------------
 
         #成澤    
         draw_effect(screen)

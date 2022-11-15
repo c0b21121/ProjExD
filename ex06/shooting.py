@@ -1,3 +1,4 @@
+from pygame import mixer
 import pygame
 import sys
 import math
@@ -34,6 +35,7 @@ ebull_f =[False]*ENEMY_MAX
 ebull_f2 = [False]*ENEMY_MAX
 e_list = [0]*ENEMY_MAX
 e_speed = [0]*ENEMY_MAX
+se_music = None
 
 def set_bullet():#弾のスタンバイ
     global bull_n
@@ -41,6 +43,7 @@ def set_bullet():#弾のスタンバイ
     bull_x[bull_n] = px-16
     bull_y[bull_n] = py-32
     bull_n = (bull_n+1)%BULLET_MAX
+
 
 def move_bullet(screen):#弾を飛ばす
     for i in range(BULLET_MAX):
@@ -71,6 +74,7 @@ def move_player(screen,key):
     space = (space+1)*key[pygame.K_SPACE]
     if space%5 == 1: #5フレーム毎に弾を飛ばす
         set_bullet()
+        mixer.music.play(1)
 
     screen.blit(img_player,[px-16,py-16])
 def set_enemy(x,y,a,enemy,speed):
@@ -119,6 +123,10 @@ def main():
     pygame.display.set_caption("シューティングゲーム")
     screen = pygame.display.set_mode((640,480))
     clock = pygame.time.Clock()
+    mixer.init()
+    mixer.music.load("fig/se_music.mp3")
+
+    se_music = pygame.mixer.Sound("fig/se_music.mp3")
 
     while True:
         t=t+1
@@ -127,6 +135,7 @@ def main():
                 pygame.quit()
                 sys.exit()
         bg_y = (bg_y+16)%480
+        
         screen.blit(img_bg,[0,bg_y-480])
         screen.blit(img_bg,[0,bg_y])
         key = pygame.key.get_pressed()

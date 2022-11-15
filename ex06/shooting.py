@@ -262,11 +262,11 @@ def move_enemy(screen): #enemyの移動
                                 t = 0
                         #(佐々木)
                         if idx == 3:
-                            if score >= 200:
+                            if score >= 70:
                                 idx = 4
                                 t = 0 
                         else:
-                            if score >= 200:                            
+                            if score >= 100:                            
                                 idx = 7
                                 t = 0
 
@@ -387,7 +387,7 @@ def main(): #main関数
         if idx == 4: #Hardモードからのclear
             draw_text(screen,320,240,"GAMECLEAR",100,YELLOW)
             draw_text(screen,330,320,"NEXT LEVEL:push『3』key",50,BLACK)
-            draw_text(screen,385,320,"GAME ESCAPE:push『5』key",55,BLACK)
+            draw_text(screen,385,400,"GAME ESCAPE:push『5』key",55,BLACK)
             if key[pg.K_3] == 1:
                 idx = 5
                 t = 0

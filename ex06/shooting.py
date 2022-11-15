@@ -2,7 +2,12 @@ import pygame as pg
 import sys
 import math
 import random
+import tkinter.messagebox as tkm
 
+#C0B21009 新垣颯大==================================================
+WIDTH = 640
+HEIGHT = 480
+#C0B21009 新垣颯大==================================================
 
 img_bg = pg.image.load("fig/sora2.png")
 img_player = pg.image.load("fig/mafu2.png")
@@ -37,16 +42,17 @@ WHITE = (255, 255, 255)
 GREEN = (0, 255, 0)
 
 bg_y = 0 #背景のy座標
+
 px = 320 #プレイヤーのX座標
 py = 240 #プレイヤーのY座標
-bx = 0 #弾のX座標
-by = 0 #弾のY座標
+
 t = 0 #タイマー変数
 space = 0
 BULLET_MAX = 100 #弾の最大値
 ENEMY_MAX = 100 #敵の最大数
 ENEMY_BULLET=1
 bull_n = 0
+
 bull_x =[0] * BULLET_MAX
 bull_y =[0] * BULLET_MAX
 bull_f =[False] * BULLET_MAX
@@ -76,6 +82,8 @@ def set_bullet(): #弾のスタンバイ
     bull_n = (bull_n + 1) % BULLET_MAX
 
 
+
+
 def move_bullet(screen):#弾を飛ばす
     for i in range(BULLET_MAX):
         if bull_f[i] == True:
@@ -85,22 +93,27 @@ def move_bullet(screen):#弾を飛ばす
                 bull_f[i] = False
 
 
+
 def move_player(screen, key):
     global px, py, space, player_hp, player_muteki, game_state, t, score
     if key[pg.K_UP] == 1:
+
         py = py - 10
         if py < 20:
             py = 20
     if key[pg.K_DOWN] == 1:
         py = py + 10
+
         if py > 400:
             py = 400
     if key[pg.K_LEFT] == 1:
+
         px = px - 10
         if px < 20:
             px = 20
     if key[pg.K_RIGHT] == 1:
         px = px + 10
+
         if px > 570:
             px = 570
 
@@ -141,6 +154,7 @@ def move_player(screen, key):
 
 
 def set_enemy(x, y, a, enemy, speed):
+
     global ebull_n
     while True:
         if ebull_f[ebull_n] == False:
@@ -164,6 +178,7 @@ def move_enemy(screen):
             if e_list[i] == 0 and ebull_y[i] > 100 and ebull_f2[i] == False:#弾を発射
                 set_enemy(ebull_x[i], ebull_y[i], 90, 1, 15)
                 ebull_f2[i] = True
+                
             if ebull_x[i] < -40 or ebull_x[i] > 680 or ebull_y[i] < -40 or ebull_y[i] > 520: #画面外に敵が消える
                 ebull_f[i] = False
                 ebull_f2[i] = False
@@ -221,6 +236,7 @@ def draw_text(screen, x, y, text, size, color):
 
 
 def main():
+
     global t, bg_y,  game_state, score, px, py, player_hp, player_muteki
     pg.init()
     pg.display.set_caption("シューティングゲーム")
@@ -280,6 +296,7 @@ def main():
         draw_effect(screen)
         pg.display.update()
         clock.tick(30)
+
 
 
 if __name__ == "__main__":

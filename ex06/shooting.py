@@ -96,6 +96,7 @@ def move_bullet(screen):#弾を飛ばす
     img_attack1 = pg.transform.scale(img_weapon,random_num)
     img_attack2 = pg.transform.rotozoom(img_attack1, 0, 1.0)
 
+    
     for i in range(BULLET_MAX):
         if bull_f[i] == True:
             bull_y[i] = bull_y[i] - 32

@@ -1,4 +1,3 @@
-import pygame as pg
 import sys
 import math
 import random
@@ -68,6 +67,7 @@ bull_y =[0] * BULLET_MAX
 bull_f =[False] * BULLET_MAX
 
 ebull_n = 0
+
 ebull_x = [0] * ENEMY_MAX
 ebull_y = [0] * ENEMY_MAX
 ebull_a = [0] * ENEMY_MAX
@@ -90,6 +90,7 @@ def set_bullet(): #弾のスタンバイ
     bull_x[bull_n] = px - 16
     bull_y[bull_n] = py - 32
     bull_n = (bull_n + 1) % BULLET_MAX
+
 
 def move_bullet(screen):#弾を飛ばす
     imgsize = [(64,70)]
@@ -137,6 +138,7 @@ def move_player(screen, key):
     if key[pg.K_SPACE]:
         if  reload_timer > REROAD_TIME:
             set_bullet()
+            mixer.music.play(1) #21055 菊池
             reload_timer = 0
         else:
             reload_timer += 1
@@ -313,6 +315,9 @@ def main(): #main関数
     pg.display.set_caption("シューティングゲーム")
     screen = pg.display.set_mode((640,480))
     clock = pg.time.Clock()
+    mixer.init()#21055 菊池
+    mixer.music.load("fig/se_music.mp3")
+
     
     running = True
     while running:
@@ -322,6 +327,7 @@ def main(): #main関数
                 running = False
 
         bg_y = (bg_y+16)%480
+        
         screen.blit(img_bg,[0,bg_y-480])
         screen.blit(img_bg,[0,bg_y])
         key = pg.key.get_pressed()

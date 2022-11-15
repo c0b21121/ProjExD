@@ -106,16 +106,14 @@ def move_bullet(screen):#弾を飛ばす
 def move_player(screen, key):
     global px, py, space, player_hp, player_muteki, idx, t, score, reload_timer, REROAD_TIME
     if key[pg.K_UP] == 1:
-
         py = py - 10
         if py < 20:
             py = 20
-            
     if key[pg.K_DOWN] == 1:
         py = py + 10
-
         if py > 400:
             py = 400
+        
 
     if key[pg.K_LEFT] == 1:
 
